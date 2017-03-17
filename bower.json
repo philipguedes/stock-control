@@ -1,0 +1,22 @@
+{
+  "name": "Stock Control",
+  "description": "Creates and manages the stock of a virtual store",
+  "main": "index.html",
+  "authors": [
+    "Patrick <tiicke_@hotmail.com>",
+    "Philip <philipguedes@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#2.0.0-rc.2"
+  }
+}
