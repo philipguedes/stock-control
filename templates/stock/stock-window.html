@@ -1,0 +1,95 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="stock-window">
+    <template>
+        <style>
+         paper-material.stock-frame {
+             background-color: #ffffff;
+             padding: 16px;
+             margin: 8px;
+         }
+        </style>
+
+        <paper-material elevation="2" class="stock-frame">
+            <div>
+                <span>COISINHA PARA CRIAR PEÇA NOVA</span>
+            </div>
+            <paper-input
+                id="cost"
+                value="{{cost}}"
+                label="Custo da peça">
+            </paper-input>
+            <paper-input
+                id="description"
+                value="{{description}}"
+                label="Descrição">
+            </paper-input>
+            <paper-input
+                id="link"
+                value="{{link}}"
+                label="Link do Instagram">
+            </paper-input>
+            <paper-input
+                id="price"
+                value="{{price}}"
+                label="Preço">
+            </paper-input>
+            <paper-button on-tap="_postNewItem">
+                Criar
+            </paper-button>
+        </paper-material>
+        <paper-material elevation="2" class="stock-frame">
+            <div>
+                <span>COISINHA PARA PROCURAR PEÇA</span>
+            </div>
+            <paper-input
+                id="link"
+                value="{{link}}"
+                label="Link do Instagram">
+            </paper-input>
+            <paper-button on-tap="getItemByLink">
+                Procurar
+            </paper-button>
+        </paper-material>
+        <!-- insert ajax here -->
+    </template>
+    <script>
+     Polymer({
+         is: 'stock-window',
+         properties: {
+             cost: Number,
+             description: String,
+             link: String,
+             price: Number
+         },
+         ready: function(){
+             console.log('hi, its ready');
+         },
+         _postNewItem: function(){
+             // Create endpoint to insert a new item into Firebase
+             console.log('Creating object...');
+             var item = {cost: this.cost, description: this.description, link: this.link, price: this.price}
+             console.log(item);
+         },
+         _handlePostNewItemResponse: function(response){
+         },
+         _handlePostNewItemError: function(response){
+         },
+         getItemByLink: function(){
+             // Create endpoint to get item by link
+             console.log("Item by link");
+         },
+         _handleGetItemByLinkRespone: function(response){
+         },
+         _handleGetItemByLinkError: function(response){
+         }
+     });
+    </script>
+</dom-module>
