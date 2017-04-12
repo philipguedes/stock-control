@@ -5,6 +5,7 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-icon/communication-icon.html">
 <link rel="import" href="../bower_components/gold-password-input/gold-password-input.html">
 
@@ -24,18 +25,54 @@
         }
     </style>
     <paper-material elevation="2" class="login-frame">
-        <paper-input label="email">
+        <paper-input
+            label="email"
+            value="{{email}}">
             <iron-icon style="color: black; padding-right: 8px;" icon="mail" prefix></iron-icon>
         </paper-input>
-        <gold-password-input label="password" reveal suffix>
+        <gold-password-input
+            label="password"
+            reveal
+            suffix
+            value="{{password}}">
         </gold-password-input>
-        <paper-button raised class="indigo">LOGIN</paper-button>
+        <paper-button raised class="indigo" on-tap="loginRequest">Login</paper-button>
     </paper-material>
+    <iron-ajax
+        id="login_ajax"
+        handle-as="json"
+        headers='{"Content-Type": "application/json"}'
+        on-response="handleLoginResponse"
+        on-error="handleLoginError"
+        url="/login">
+    </iron-ajax>
+
 </template>
 <script>
     Polymer({
       /* this is the element's prototype */
-      is: 'login-window'
+      is: 'login-window',
+      properties: {
+        email: String,
+        password: String
+      },
+      loginRequest: function(){
+        var ajax = this.$.login_ajax;
+        ajax.method = 'POST';
+        ajax.body = {email: this.email, password: this.password};
+        console.log(this.email);
+        console.log(this.password);
+        ajax.generateRequest();
+      },
+      handleLoginResponse: function(response){
+          console.log('RESPONDEU')
+          console.log(response);
+          console.log(window)
+          window.location.replace('/stock-control')
+      },
+      handleLoginError: function(response){
+          console.log('FALHOU')
+      }
     });
   </script>
 </dom-module>
