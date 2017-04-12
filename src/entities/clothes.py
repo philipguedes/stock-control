@@ -2,16 +2,14 @@
 
 
 class Clothes():
-    def __init__(self, dateIn, trader, link, description="", cost=0, status="available", price=None, dateOut=None, paymentStatus="N/A"): # noqa
+    def __init__(self, dateIn, trader, link, price, cost, description="", status="available"): # noqa
         self.cost = cost
         self.dateIn = dateIn
         self.trader = trader
         self.price = price
-        self.dateOut = dateOut
         self.description = description
         self.status = status
         self.link = link
-        self.paymentStatus = paymentStatus
 
     def reserve(self):
         self.status = "reserved"
@@ -19,9 +17,8 @@ class Clothes():
     def updatePrice(self, price):
         self.price = price
 
-    def sold(self, dateOut, paymentStatus="paid", price=None):
+    def sold(self, dateOut, price, paymentStatus="paid"):
         self.status = "unavailable"
         self.dateOut = dateOut
         self.paymentStatus = paymentStatus
-        if price:
-            self.price = price
+        self.price = price
